@@ -24,11 +24,8 @@ const Pokecard = ({ pokemon, loading }: any) => {
 
           return (
             <>
-              <Link
-                to={`/pokemon/${pokemonName}/${pokemonID} `}
-                key={pokemonID}
-              >
-                <div className="pokecard-container">
+              <Link to={`/pokemon/${pokemonName}/${pokemonID} `}>
+                <div key={pokemonID} className="pokecard-container">
                   <h3 className="poke-id">{pokemonID}</h3>
                   <div className="poke-img">
                     <img

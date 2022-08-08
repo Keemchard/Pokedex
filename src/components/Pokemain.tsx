@@ -16,7 +16,6 @@ const Pokemain = () => {
   const [previousUrl, setPreviousUrl] = useState<any>();
 
   const [pokemonsData, setPokemonsData] = useState<any>([]); //will hold an array of pokemon data
-  const [pokemonInfo, setPokemonInfo] = useState<any>(); //data/info to be pass into the Pokeinfo component
 
   const pokemon = async () => {
     setLoading(true);
@@ -24,20 +23,16 @@ const Pokemain = () => {
     const { data } = response;
     const { results, next, previous } = data;
 
-    // console.log(results);
     getPokemon(results);
     setNextUrl(next);
     setPreviousUrl(previous);
     setLoading(false);
   };
-  console.log(pokemonsData);
 
   const getPokemon = async (response: any) => {
     response.map(async (item: any) => {
       const result = await axios.get(item.url);
       const { data: newData } = result;
-      // console.log(newData);
-      console.log(result);
 
       setPokemonsData((data: any) => {
         //to pass in new set of datas upon clicking either next or previous
@@ -56,13 +51,7 @@ const Pokemain = () => {
       <div className="main-container">
         <div className="card">
           <div className="card-con">
-            <Pokecard
-              pokemon={pokemonsData}
-              loading={loading}
-              // pokemonInfo={(pokemon: any) => {
-              //   setPokemonInfo(pokemon);
-              // }}
-            />
+            <Pokecard pokemon={pokemonsData} loading={loading} />
           </div>
           <div className="card-btn">
             <button
@@ -84,9 +73,6 @@ const Pokemain = () => {
             </button>
           </div>
         </div>
-        {/* <div className="card-info">
-          <Pokeinfo pokeinfo={pokemonInfo} />
-        </div> */}
       </div>
     </>
   );
