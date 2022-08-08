@@ -9,13 +9,13 @@ import Pokeinfo from "./components/Pokeinfo";
 function App() {
   return (
     <>
-      <Pokemain />
-      {/* <BrowserRouter>
+      {/* <Pokemain /> */}
+      <BrowserRouter>
         <Routes>
           <Route path="/" element={<Pokemain />} />
           <Route path="/pokemon/:pokeinfo" element={<Pokeinfo />} />
         </Routes>
-      </BrowserRouter> */}
+      </BrowserRouter>
     </>
   );
 }

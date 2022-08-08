@@ -7,52 +7,44 @@ import Pokecard from "./pokecard";
 import Pokeinfo from "./Pokeinfo";
 
 const Pokemain = () => {
-  const [pokeData, setPokeData] = useState<any>([]);
-  //loading
-  const [loading, setLoading] = useState(true);
-  //API URL
+  const [loading, setLoading] = useState(true); //loading
   const [apiUrl, setApiUrl] = useState(
     "https://pokeapi.co/api/v2/pokemon?limit=20"
-  );
-  //data to be pass into the Pokeinfo component
-  const [pokeinfo, setPokeinfo] = useState<any>();
-
+  ); //API URL
   //button hooks
   const [nextUrl, setNextUrl] = useState<any>();
   const [previousUrl, setPreviousUrl] = useState<any>();
 
-  const pokeFun = async () => {
+  const [pokemonsData, setPokemonsData] = useState<any>([]); //will hold an array of pokemon data
+  const [pokemonInfo, setPokemonInfo] = useState<any>(); //data/info to be pass into the Pokeinfo component
+
+  const pokemon = async () => {
     setLoading(true);
     const response = await axios.get(apiUrl);
     const { data } = response;
     const { results, next, previous } = data;
-    // console.log(results);
-    // console.log(data);
-    // console.log(next);
-    // console.log(previous);
+
     getPokemon(results);
     setNextUrl(next);
     setPreviousUrl(previous);
     setLoading(false);
-    // console.log(pokeData);
   };
 
   const getPokemon = async (response: any) => {
     response.map(async (item: any) => {
-      // console.log(items);
       const result = await axios.get(item.url);
-      // const datas: any = [...pokeData]; //newly added data
-      // datas.push(result.data);
-      // setPokeData(datas);
-      setPokeData((state: any) => {
-        state = [...state, result.data];
-        return state;
+      const { data: newData } = result;
+
+      setPokemonsData((data: any) => {
+        //to pass in new set of datas upon clicking either next or previous
+        data = [...data, newData];
+        return data;
       });
     });
   };
 
   useEffect(() => {
-    pokeFun();
+    pokemon();
   }, [apiUrl]);
 
   return (
@@ -61,26 +53,26 @@ const Pokemain = () => {
         <div className="card">
           <div className="card-con">
             <Pokecard
-              pokemon={pokeData}
+              pokemon={pokemonsData}
               loading={loading}
               pokemonInfo={(pokemon: any) => {
-                setPokeinfo(pokemon);
+                setPokemonInfo(pokemon);
               }}
             />
           </div>
           <div className="card-btn">
             <button
               onClick={() => {
-                setPokeData([]);
+                setPokemonsData([]);
                 setApiUrl(previousUrl);
               }}
             >
               PREVIOUS
             </button>
-            {/* //---------// */}
+
             <button
               onClick={() => {
-                setPokeData([]);
+                setPokemonsData([]);
                 setApiUrl(nextUrl);
               }}
             >
@@ -89,7 +81,7 @@ const Pokemain = () => {
           </div>
         </div>
         <div className="card-info">
-          <Pokeinfo pokeinfo={pokeinfo} />
+          <Pokeinfo pokeinfo={pokemonInfo} />
         </div>
       </div>
     </>

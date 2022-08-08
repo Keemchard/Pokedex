@@ -1,39 +1,45 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./pokecard.component.css";
 
 const Pokecard = ({ pokemon, loading, pokemonInfo }: any) => {
-  console.log(pokemon);
+  //pokemon is just  the pokeData from Pokomain FC which is an array of pokemon info
+
   return (
     <>
       {loading ? (
         <h1>Loading...........</h1>
       ) : (
-        pokemon.map((pokemonParams: any) => {
-          //nvm this code below
-          const properPokemonNaming = `${pokemonParams.name[0].toUpperCase()} ${
-            pokemonParams.name
-          }`;
-          //nvm this code above
+        pokemon.map((specificPokemonData: any) => {
+          //destructure specific pokemon data below
+          const {
+            id: pokemonID,
+            name: pokemonName,
+            sprites: {
+              other: {
+                dream_world: { front_default: pokemonImage },
+              },
+            },
+          } = specificPokemonData;
 
           return (
             <div
               className="pokecard-container"
-              key={pokemonParams.id}
+              key={pokemonID}
               onClick={() => {
-                pokemonInfo(pokemonParams);
+                pokemonInfo(specificPokemonData);
               }}
             >
-              <h3 className="poke-id">{pokemonParams.id}</h3>
+              <h3 className="poke-id">{pokemonID}</h3>
               <div className="poke-img">
                 <img
-                  loading="lazy"
                   className="pokemon-img"
-                  src={pokemonParams.sprites.other.dream_world.front_default}
-                  alt={pokemonParams.name}
+                  src={pokemonImage}
+                  alt={pokemonName}
                 />
               </div>
               <div className="poke-name">
-                <h2 className="pokemon-name">{pokemonParams.name}</h2>
+                <h2 className="pokemon-name">{pokemonName}</h2>
               </div>
             </div>
           );

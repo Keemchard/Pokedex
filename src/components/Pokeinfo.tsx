@@ -1,4 +1,5 @@
 import React from "react";
+import { useParams } from "react-router-dom";
 import { couldStartTrivia } from "typescript";
 
 const Pokeinfo = ({ pokeinfo }: any) => {
@@ -16,7 +17,6 @@ const Pokeinfo = ({ pokeinfo }: any) => {
           {pokeinfo.types.map((param: any) => {
             return <p key={Math.random()}>{`TYPE: ${param.type.name}`}</p>;
           })}
-          {console.log(pokeinfo.id)}
         </>
       )}
     </>
