@@ -1,0 +1,19 @@
+.pokecard-container {
+  background-color: gray;
+  height: 250px;
+  width: 250px;
+  margin: 10px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.pokemon-img {
+  width: 120px;
+  height: 120px;
+  margin: 0 auto;
+}
+
+.pokemon-name {
+  margin-top: 30px;
+}
