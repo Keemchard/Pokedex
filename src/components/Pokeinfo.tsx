@@ -1,14 +1,24 @@
 import React from "react";
+import { couldStartTrivia } from "typescript";
 
-const Pokeinfo = () => {
+const Pokeinfo = ({ pokeinfo }: any) => {
   return (
     <>
-      {/* <div className="pokeinfo-container">
-        <h2>Pokemon Info here</h2>
-        <p>name</p>
-        <p>picture</p>
-        <p>type</p>
-      </div> */}
+      {!pokeinfo ? (
+        ""
+      ) : (
+        <>
+          <div className="pokeinfo-container">
+            <img src={pokeinfo.sprites.front_default} alt={pokeinfo.name} />
+            <p>{`ID: ${pokeinfo.id}`}</p>
+            <h2>{`NAME: ${pokeinfo.name}`}</h2>
+          </div>
+          {pokeinfo.types.map((param: any) => {
+            return <p key={Math.random()}>{`TYPE: ${param.type.name}`}</p>;
+          })}
+          {console.log(pokeinfo.id)}
+        </>
+      )}
     </>
   );
 };

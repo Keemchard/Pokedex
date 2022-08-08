@@ -1,5 +1,5 @@
 .main-container {
-  background-color: lightblue;
+  background-color: #121212;
   padding: 15px;
   display: flex;
   justify-content: center;
@@ -9,11 +9,12 @@
 .card .card-con {
   display: grid;
   grid-template-columns: auto auto auto auto;
-  background-color: tomato;
+  background-color: #121212;
   padding: 10px;
   overflow-y: scroll;
   height: 80vh;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
+  background-color: #424242;
 }
 
 .card-btn {
@@ -23,7 +24,12 @@
 }
 
 .card-btn button {
-  padding: 10px;
+  padding: 15px;
   margin-right: 20px;
   width: 150px;
+  border-radius: 5px;
+  background-color: #ff5a79;
+  font-weight: bold;
+  color: white;
+  letter-spacing: 2px;
 }

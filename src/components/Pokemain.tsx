@@ -14,6 +14,8 @@ const Pokemain = () => {
   const [apiUrl, setApiUrl] = useState(
     "https://pokeapi.co/api/v2/pokemon?limit=20"
   );
+  //data to be pass into the Pokeinfo component
+  const [pokeinfo, setPokeinfo] = useState<any>();
 
   //button hooks
   const [nextUrl, setNextUrl] = useState<any>();
@@ -25,7 +27,7 @@ const Pokemain = () => {
     const { data } = response;
     const { results, next, previous } = data;
     // console.log(results);
-    console.log(data);
+    // console.log(data);
     // console.log(next);
     // console.log(previous);
     getPokemon(results);
@@ -58,7 +60,13 @@ const Pokemain = () => {
       <div className="main-container">
         <div className="card">
           <div className="card-con">
-            <Pokecard pokemon={pokeData} loading={loading} />
+            <Pokecard
+              pokemon={pokeData}
+              loading={loading}
+              pokemonInfo={(pokemon: any) => {
+                setPokeinfo(pokemon);
+              }}
+            />
           </div>
           <div className="card-btn">
             <button
@@ -67,7 +75,7 @@ const Pokemain = () => {
                 setApiUrl(previousUrl);
               }}
             >
-              Previous
+              PREVIOUS
             </button>
             {/* //---------// */}
             <button
@@ -76,12 +84,12 @@ const Pokemain = () => {
                 setApiUrl(nextUrl);
               }}
             >
-              Next
+              NEXT
             </button>
           </div>
         </div>
         <div className="card-info">
-          <Pokeinfo />
+          <Pokeinfo pokeinfo={pokeinfo} />
         </div>
       </div>
     </>
