@@ -22,20 +22,13 @@ const Pokecard = ({ pokemon, loading }: any) => {
             },
           } = specificPokemonData;
 
-          console.log(pokemonImage);
-
           return (
             <>
               <Link
                 to={`/pokemon/${pokemonName}/${pokemonID} `}
                 key={pokemonID}
               >
-                <div
-                  className="pokecard-container"
-                  // onClick={() => {
-                  //   pokemonInfo(specificPokemonData);
-                  // }}
-                >
+                <div className="pokecard-container">
                   <h3 className="poke-id">{pokemonID}</h3>
                   <div className="poke-img">
                     <img

@@ -24,17 +24,20 @@ const Pokemain = () => {
     const { data } = response;
     const { results, next, previous } = data;
 
-    // console.log(results[0].name);
+    // console.log(results);
     getPokemon(results);
     setNextUrl(next);
     setPreviousUrl(previous);
     setLoading(false);
   };
+  console.log(pokemonsData);
 
   const getPokemon = async (response: any) => {
     response.map(async (item: any) => {
       const result = await axios.get(item.url);
       const { data: newData } = result;
+      // console.log(newData);
+      console.log(result);
 
       setPokemonsData((data: any) => {
         //to pass in new set of datas upon clicking either next or previous
