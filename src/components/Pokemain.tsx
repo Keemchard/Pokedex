@@ -24,6 +24,7 @@ const Pokemain = () => {
     const { data } = response;
     const { results, next, previous } = data;
 
+    // console.log(results[0].name);
     getPokemon(results);
     setNextUrl(next);
     setPreviousUrl(previous);
@@ -55,9 +56,9 @@ const Pokemain = () => {
             <Pokecard
               pokemon={pokemonsData}
               loading={loading}
-              pokemonInfo={(pokemon: any) => {
-                setPokemonInfo(pokemon);
-              }}
+              // pokemonInfo={(pokemon: any) => {
+              //   setPokemonInfo(pokemon);
+              // }}
             />
           </div>
           <div className="card-btn">
@@ -80,9 +81,9 @@ const Pokemain = () => {
             </button>
           </div>
         </div>
-        <div className="card-info">
+        {/* <div className="card-info">
           <Pokeinfo pokeinfo={pokemonInfo} />
-        </div>
+        </div> */}
       </div>
     </>
   );

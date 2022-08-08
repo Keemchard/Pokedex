@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./pokecard.component.css";
 
-const Pokecard = ({ pokemon, loading, pokemonInfo }: any) => {
+const Pokecard = ({ pokemon, loading }: any) => {
   //pokemon is just  the pokeData from Pokomain FC which is an array of pokemon info
 
   return (
@@ -22,26 +22,34 @@ const Pokecard = ({ pokemon, loading, pokemonInfo }: any) => {
             },
           } = specificPokemonData;
 
+          console.log(pokemonImage);
+
           return (
-            <div
-              className="pokecard-container"
-              key={pokemonID}
-              onClick={() => {
-                pokemonInfo(specificPokemonData);
-              }}
-            >
-              <h3 className="poke-id">{pokemonID}</h3>
-              <div className="poke-img">
-                <img
-                  className="pokemon-img"
-                  src={pokemonImage}
-                  alt={pokemonName}
-                />
-              </div>
-              <div className="poke-name">
-                <h2 className="pokemon-name">{pokemonName}</h2>
-              </div>
-            </div>
+            <>
+              <Link
+                to={`/pokemon/${pokemonName}/${pokemonID} `}
+                key={pokemonID}
+              >
+                <div
+                  className="pokecard-container"
+                  // onClick={() => {
+                  //   pokemonInfo(specificPokemonData);
+                  // }}
+                >
+                  <h3 className="poke-id">{pokemonID}</h3>
+                  <div className="poke-img">
+                    <img
+                      className="pokemon-img"
+                      src={pokemonImage}
+                      alt={pokemonName}
+                    />
+                  </div>
+                  <div className="poke-name">
+                    <h2 className="pokemon-name">{pokemonName}</h2>
+                  </div>
+                </div>
+              </Link>
+            </>
           );
         })
       )}
