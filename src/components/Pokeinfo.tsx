@@ -9,7 +9,7 @@ const Pokeinfo = () => {
   const pokemonUrl = `https://pokeapi.co/api/v2/pokemon/${pokemonID}/`;
 
   const [pokemonData, setPokemonData] = useState<any>([]);
-  console.log(pokemonName);
+  // console.log(pokemonName);
 
   useEffect(() => {
     axios.get(pokemonUrl).then((response) => {
@@ -23,7 +23,7 @@ const Pokeinfo = () => {
   const { abilities, base_experience, height, weight, stats, types }: any =
     pokemonData;
 
-  console.log(pokemonData);
+  // console.log(pokemonData);
   return (
     <div className="pokeinfo-main">
       <div className="pokeinfo-con">

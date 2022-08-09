@@ -49,7 +49,7 @@ const Pokemain = () => {
   return (
     <>
       <div className="main-container">
-        <div className="card">
+        <div className="card-main">
           <div className="card-con">
             <Pokecard pokemon={pokemonsData} loading={loading} />
           </div>
