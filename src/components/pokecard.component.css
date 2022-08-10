@@ -7,13 +7,13 @@
   position: relative;
   border-radius: 10px;
   transition: 0.25s;
-
   /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
 }
 
 .pokecard-container:hover {
   transform: scale(1.05);
 }
+
 .poke-id {
   position: absolute;
   top: 10px;
