@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import "./pokeinfo.component.css";
 
 const Pokeinfo = () => {
@@ -71,6 +71,9 @@ const Pokeinfo = () => {
       <p style={{ marginTop: "20px", color: "gray" }}>
         (hover/click the card to see more)
       </p>
+      <Link to={`/`}>
+        <button className="back-btn">Back</button>
+      </Link>
     </div>
   );
 };

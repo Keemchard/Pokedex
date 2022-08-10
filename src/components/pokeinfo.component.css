@@ -50,10 +50,12 @@
   transform: rotateY(180deg);
   padding: 10px 10px 10px 20px;
 }
+
 .pokeinfo-back p {
   margin-left: 20px;
   font-style: italic;
 }
+
 .pokeinfo-back h3 {
   color: #ffdd67;
 }
@@ -71,6 +73,7 @@
   height: 25%;
   background-color: #ffdd67;
 }
+
 .pokeinfo-name h1 {
   color: black;
 }
@@ -79,6 +82,7 @@
   width: 90%;
   height: 90%;
 }
+
 .pokeinfo-id {
   position: absolute;
   top: -2px;
@@ -95,8 +99,24 @@
   justify-content: space-around;
   text-align: center;
 }
+
 .types h3 {
   background-color: #ff5a79;
   width: 100px;
   padding: 5px;
+}
+
+.back-btn {
+  padding: 10px;
+  width: 100px;
+  background-color: #ff5a79;
+  border: none;
+  border-radius: 5px;
+  margin-top: 20px;
+  transition: 0.2s;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.back-btn:hover {
+  transform: scale(1.1);
 }

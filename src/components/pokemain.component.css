@@ -8,8 +8,9 @@
 
 .card-main {
   padding: 10px;
-  max-width: 1366px;
-  margin: auto;
+  /* max-width: 1366px; */
+  /* margin: auto; */
+  /* background-color: red; */
 }
 
 .card-main .card-con {
@@ -19,11 +20,12 @@
 
   padding: 10px;
   overflow-y: scroll;
-  height: 80vh;
+  height: 85vh;
   margin-bottom: 20px;
   background-color: #424242;
   background-color: #121212;
   transition: 0.25s;
+  /* background-color: white; */
 }
 
 .card-btn {
