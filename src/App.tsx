@@ -4,12 +4,13 @@ import "./App.css";
 import Pokemain from "./components/Pokemain";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import Pokeinfo from "./components/Pokeinfo";
-
+//types
+import { pokemonsModel } from "./types/pokeTypes";
 import axios from "axios";
 
 function App() {
-  const [loading, setLoading] = useState(true); //loading
-  const [apiUrl, setApiUrl] = useState(
+  const [loading, setLoading] = useState<boolean>(true); //loading
+  const [apiUrl, setApiUrl] = useState<string>(
     "https://pokeapi.co/api/v2/pokemon?limit=20"
   ); //API URL
   //button hooks
@@ -17,7 +18,7 @@ function App() {
   const [previousUrl, setPreviousUrl] = useState<any>();
 
   const [pokemonsData, setPokemonsData] = useState<any>([]); //will hold an array of pokemon data
-
+  // console.log(pokemonsData);
   const pokemon = async () => {
     setLoading(true);
     const response = await axios.get(apiUrl);
@@ -30,7 +31,8 @@ function App() {
     setLoading(false);
   };
 
-  const getPokemon = async (response: any) => {
+  const getPokemon = async (response: pokemonsModel) => {
+    // console.log(response);
     response.map(async (item: any) => {
       const result = await axios.get(item.url);
       const { data: newData } = result;
@@ -42,7 +44,7 @@ function App() {
     });
   };
 
-  console.log(pokemonsData);
+  // console.log(pokemonsData);
 
   useEffect(() => {
     pokemon();

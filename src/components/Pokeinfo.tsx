@@ -1,15 +1,21 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+//types
+// import {
+//   pokeInfoModel,
+//   abilitiesModel,
+//   statsModel,
+//   typesModel,
+// } from "../types/pokeTypes";
 import "./pokeinfo.component.css";
 
 const Pokeinfo = () => {
   const { pokemonName, pokemonID } = useParams();
-
   const pokemonUrl = `https://pokeapi.co/api/v2/pokemon/${pokemonID}/`;
 
-  const [pokemonData, setPokemonData] = useState<any>([]);
-  // console.log(pokemonName);
+  const [pokemonData, setPokemonData] = useState({});
+  // console.log(pokemonData);
 
   useEffect(() => {
     axios.get(pokemonUrl).then((response) => {

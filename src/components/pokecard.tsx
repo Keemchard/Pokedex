@@ -1,8 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./pokecard.component.css";
+//types
+import { pokeCardModel, pokemonsModel } from "../types/pokeTypes";
 
-const Pokecard = ({ pokemon, loading }: any) => {
+const Pokecard = ({ pokemon, loading }: pokeCardModel) => {
   //pokemon is just  the pokeData from Pokomain FC which is an array of pokemon info
 
   return (
@@ -10,7 +12,7 @@ const Pokecard = ({ pokemon, loading }: any) => {
       {loading ? (
         <h1>Loading...........</h1>
       ) : (
-        pokemon.map((specificPokemonData: any) => {
+        pokemon.map((specificPokemonData: pokemonsModel) => {
           //destructure specific pokemon data below
           const {
             id: pokemonID,

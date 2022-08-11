@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./pokemain.component.css";
 import Pokecard from "./pokecard";
+import { pokeMainModedl } from "../types/pokeTypes";
 
-const Pokemain = ({ pokemonsData, loading }: any) => {
+const Pokemain = ({ pokemonsData, loading }: pokeMainModedl) => {
   return (
     <>
       <div className="main-container">
