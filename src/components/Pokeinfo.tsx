@@ -1,20 +1,34 @@
+import { type } from "@testing-library/user-event/dist/type";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 //types
-// import {
-//   pokeInfoModel,
-//   abilitiesModel,
-//   statsModel,
-//   typesModel,
-// } from "../types/pokeTypes";
+import {
+  pokeInfoModel,
+  abilitiesModel,
+  statsModel,
+  typesModel,
+} from "../types/pokeTypes";
 import "./pokeinfo.component.css";
 
 const Pokeinfo = () => {
   const { pokemonName, pokemonID } = useParams();
   const pokemonUrl = `https://pokeapi.co/api/v2/pokemon/${pokemonID}/`;
+  const pokemonlol = {
+    abilities: { ability: { name: "" } },
+    base_experience: 0,
+    height: 0,
+    weight: 0,
+    stats: {
+      base_stat: 0,
+      stat: {
+        name: "",
+      },
+    },
+    types: { type: { name: "" } },
+  };
 
-  const [pokemonData, setPokemonData] = useState({});
+  const [pokemonData, setPokemonData] = useState<any>({});
   // console.log(pokemonData);
 
   useEffect(() => {
@@ -46,7 +60,7 @@ const Pokeinfo = () => {
             <div className="pokeinfo-name">
               <h1>{pokemonName?.toUpperCase()}</h1>
               <div className="types">
-                {types?.map((items: any) => {
+                {types?.map((items: typesModel) => {
                   return <h3 key={Math.random()}>{items.type.name}</h3>;
                 })}
               </div>
@@ -54,7 +68,7 @@ const Pokeinfo = () => {
           </div>
           <div className="pokeinfo-back">
             <h3>Abilities:</h3>
-            {abilities?.map((item: any) => {
+            {abilities?.map((item: abilitiesModel) => {
               return <p key={Math.random()}>{item.ability.name}</p>;
             })}
             <h3>Height:</h3>
@@ -64,7 +78,7 @@ const Pokeinfo = () => {
             <h3>Base Experience:</h3>
             <p>{base_experience}</p>
             <h3>Stats:</h3>
-            {stats?.map((item: any) => {
+            {stats?.map((item: statsModel) => {
               return (
                 <p
                   key={Math.random()}

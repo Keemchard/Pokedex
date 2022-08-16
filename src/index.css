@@ -19,3 +19,21 @@ code {
   box-sizing: border-box;
   color: white;
 }
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: #555;
+  border-radius: 20px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #ffdd67;
+  border-radius: 20px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #ff7281;
+}

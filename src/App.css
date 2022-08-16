@@ -32,7 +32,13 @@
 }
 
 .sidebar-con {
-  padding: 5px;
+  padding: 5px 0px 5px 5px;
+}
+
+.sidebar-pokemon-list ul {
+  /* background-color: red; */
+  overflow-y: scroll;
+  height: 70vh;
 }
 
 .sidebar-pokemon-list ul li {
@@ -108,4 +114,58 @@
 
 .sidebar-btn button:hover {
   transform: scale(1.1);
+}
+
+.content-btn button {
+  padding: 10px;
+  background-color: #ff7281;
+  border: none;
+  width: 100px;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  transition: 0.2s;
+  color: #121212;
+}
+
+.content-btn button:hover {
+  transform: scale(1.1);
+}
+
+.extra {
+  /* background-color: aqua; */
+  display: none;
+}
+
+@media only screen and (max-width: 600px) {
+  .app-container {
+    position: relative;
+  }
+  .side-bar {
+    display: none;
+  }
+
+  .extra {
+    position: fixed;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    bottom: 0px;
+    height: 100px;
+    padding: 15px 10px 10px 10px;
+    backdrop-filter: blur(10px);
+  }
+  .content-btn {
+    display: flex;
+    justify-content: space-around;
+  }
+  .content-cred {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    font-size: 13px;
+    bottom: 10px;
+    color: #ffdd67;
+  }
 }

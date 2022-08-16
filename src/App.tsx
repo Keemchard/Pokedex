@@ -5,7 +5,8 @@ import Pokemain from "./components/Pokemain";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import Pokeinfo from "./components/Pokeinfo";
 //types
-import { pokemonsModel } from "./types/pokeTypes";
+import { pokemonsModel, pokemonModel, pokeAppModel } from "./types/pokeTypes";
+
 import axios from "axios";
 
 function App() {
@@ -14,8 +15,8 @@ function App() {
     "https://pokeapi.co/api/v2/pokemon?limit=20"
   ); //API URL
   //button hooks
-  const [nextUrl, setNextUrl] = useState<any>();
-  const [previousUrl, setPreviousUrl] = useState<any>();
+  const [nextUrl, setNextUrl] = useState<string>("");
+  const [previousUrl, setPreviousUrl] = useState<string>("");
 
   const [pokemonsData, setPokemonsData] = useState<any>([]); //will hold an array of pokemon data
   // console.log(pokemonsData);
@@ -33,7 +34,7 @@ function App() {
 
   const getPokemon = async (response: pokemonsModel) => {
     // console.log(response);
-    response.map(async (item: any) => {
+    response.map(async (item: pokemonModel) => {
       const result = await axios.get(item.url);
       const { data: newData } = result;
 
@@ -41,6 +42,7 @@ function App() {
         data = [...data, newData];
         return data;
       });
+      // console.log(newData);
     });
   };
 
@@ -62,7 +64,7 @@ function App() {
             <div className="sidebar-con">
               <div className="sidebar-pokemon-list">
                 <ul>
-                  {pokemonsData.map((items: any) => {
+                  {pokemonsData.map((items: pokeAppModel) => {
                     return (
                       <Link
                         className="sidebar-link"
@@ -116,6 +118,28 @@ function App() {
                 element={<Pokeinfo />}
               />
             </Routes>
+            <div className="extra">
+              <div className="content-btn">
+                <button
+                  onClick={() => {
+                    setPokemonsData([]);
+                    setApiUrl(previousUrl);
+                  }}
+                >
+                  PREVIOUS
+                </button>
+
+                <button
+                  onClick={() => {
+                    setPokemonsData([]);
+                    setApiUrl(nextUrl);
+                  }}
+                >
+                  NEXT
+                </button>
+              </div>
+              <div className="content-cred">&copy; keemchard 2022</div>
+            </div>
           </div>
         </div>
       </BrowserRouter>
