@@ -123,7 +123,6 @@
 
 @media only screen and (max-width: 600px) {
   .pokeinfo-main {
-    background-color: red;
     height: 80vh;
   }
 }
