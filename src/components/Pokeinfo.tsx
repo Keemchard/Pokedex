@@ -1,6 +1,6 @@
 import { type } from "@testing-library/user-event/dist/type";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 //types
 import {
@@ -11,37 +11,59 @@ import {
 } from "../types/pokeTypes";
 import "./pokeinfo.component.css";
 
-const Pokeinfo = () => {
+type Props = {
+  searchPokemon?: pokeInfoModel | null;
+};
+
+const Pokeinfo: FC<Props> = (props) => {
+  const { searchPokemon } = props;
+
   const { pokemonName, pokemonID } = useParams();
   const pokemonUrl = `https://pokeapi.co/api/v2/pokemon/${pokemonID}/`;
-  const pokemonlol = {
-    abilities: { ability: { name: "" } },
+
+  const initialPokemonValue = {
+    abilities: [{ ability: { name: "" } }],
     base_experience: 0,
     height: 0,
     weight: 0,
-    stats: {
-      base_stat: 0,
-      stat: {
-        name: "",
+    stats: [
+      {
+        base_stat: 0,
+        stat: {
+          name: "",
+        },
       },
-    },
-    types: { type: { name: "" } },
+    ],
+    types: [{ type: { name: "" } }],
   };
 
-  const [pokemonData, setPokemonData] = useState<any>({});
+  const [pokemonData, setPokemonData] = useState<pokeInfoModel>(
+    searchPokemon ?? initialPokemonValue,
+  );
   // console.log(pokemonData);
 
   useEffect(() => {
+    if (searchPokemon && !pokemonID && !pokemonName) {
+      setPokemonData(pokemonData);
+      return;
+    }
     axios.get(pokemonUrl).then((response) => {
       const pokeID = response.data.id;
       if (pokeID == pokemonID) {
         setPokemonData(response.data);
       }
     });
-  }, []);
+  }, [searchPokemon]);
 
-  const { abilities, base_experience, height, weight, stats, types }: any =
-    pokemonData;
+  const {
+    abilities,
+    base_experience,
+    height,
+    weight,
+    stats,
+    types,
+    id,
+  }: pokeInfoModel = pokemonData;
 
   // console.log(pokemonData);
   return (
@@ -53,7 +75,7 @@ const Pokeinfo = () => {
 
             <div className="pokeinfo-img">
               <img
-                src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${pokemonID}.svg`}
+                src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${pokemonID ?? id}.svg`}
                 alt=""
               />
             </div>

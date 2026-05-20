@@ -5,24 +5,25 @@ export type pokemonModel = {
 
 //for pokeCard Model
 export type pokeCardModel = {
-  pokemon: pokemonsModel;
+  pokemon: pokemonsModel | null;
   loading: boolean;
 };
 
 //for pokeMain Model (actually same lang to with pokeCardModel iniba ko pa kase name proprty ng isa)
 export type pokeMainModedl = {
-  pokemonsData: pokemonsModel;
+  pokemonsData: pokemonsModel | null;
   loading: boolean;
 };
 
 //for pokeInfo Model
 export type pokeInfoModel = {
-  abilities: abilitiesModel;
+  abilities: abilitiesModel[];
   base_experience: number;
   height: number;
   weight: number;
-  stats: statsModel;
-  types: typesModel;
+  stats: statsModel[];
+  types: typesModel[];
+  id?: number;
 };
 
 //for pokeApp Model

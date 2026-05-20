@@ -12,7 +12,7 @@ const Pokecard = ({ pokemon, loading }: pokeCardModel) => {
       {loading ? (
         <h1>Loading...........</h1>
       ) : (
-        pokemon.map((specificPokemonData: pokemonsModel) => {
+        pokemon?.map((specificPokemonData: pokemonsModel) => {
           //destructure specific pokemon data below
           const {
             id: pokemonID,

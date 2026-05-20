@@ -8,15 +8,21 @@ import Pokeinfo from "./components/Pokeinfo";
 import { pokemonsModel, pokemonModel, pokeAppModel } from "./types/pokeTypes";
 
 import axios from "axios";
+import { useDebounce } from "./hooks/useDebounce";
+import usePokemonSearch from "./hooks/request/useSearchPokemon";
 
 function App() {
   const [loading, setLoading] = useState<boolean>(true); //loading
   const [apiUrl, setApiUrl] = useState<string>(
-    "https://pokeapi.co/api/v2/pokemon?limit=20"
+    "https://pokeapi.co/api/v2/pokemon?limit=20",
   ); //API URL
   //button hooks
   const [nextUrl, setNextUrl] = useState<string>("");
   const [previousUrl, setPreviousUrl] = useState<string>("");
+
+  const [keyword, setKeyword] = useState<string>("");
+
+  const debouncedKeyword = useDebounce<string>(keyword, 500);
 
   const [pokemonsData, setPokemonsData] = useState<any>([]); //will hold an array of pokemon data
   // console.log(pokemonsData);
@@ -31,6 +37,19 @@ function App() {
     setPreviousUrl(previous);
     setLoading(false);
   };
+
+  const {
+    pokemonData: PokemonDataFromSearch,
+    loading: searchLoading,
+    error: searchError,
+  } = usePokemonSearch(debouncedKeyword);
+
+  console.log({
+    keyword,
+    debouncedKeyword,
+    pokemonsData,
+    PokemonDataFromSearch,
+  });
 
   const getPokemon = async (response: pokemonsModel) => {
     // console.log(response);
@@ -51,6 +70,7 @@ function App() {
   useEffect(() => {
     pokemon();
   }, [apiUrl]);
+
   return (
     <>
       <BrowserRouter>
@@ -103,21 +123,37 @@ function App() {
           </div>
           <div className="main-content">
             <div className="search">
-              <input type="text" placeholder="Enter Pokemon name" />
-              <button>Search</button>
+              <input
+                type="text"
+                placeholder="Enter Pokemon name"
+                value={keyword}
+                onChange={(e) => setKeyword(e.target.value)}
+              />
             </div>
-            <Routes>
-              <Route
-                path="/"
-                element={
-                  <Pokemain pokemonsData={pokemonsData} loading={loading} />
-                }
-              />
-              <Route
-                path="/pokemon/:pokemonName/:pokemonID"
-                element={<Pokeinfo />}
-              />
-            </Routes>
+            {keyword && PokemonDataFromSearch && !searchLoading && (
+              <Pokeinfo searchPokemon={PokemonDataFromSearch} />
+            )}
+
+            {keyword && !PokemonDataFromSearch && !searchLoading && (
+              <div>No Pokemon Found</div>
+            )}
+
+            {searchLoading && keyword && <div>loading...</div>}
+
+            {!keyword && (
+              <Routes>
+                <Route
+                  path="/"
+                  element={
+                    <Pokemain pokemonsData={pokemonsData} loading={loading} />
+                  }
+                />
+                <Route
+                  path="/pokemon/:pokemonName/:pokemonID"
+                  element={<Pokeinfo />}
+                />
+              </Routes>
+            )}
             <div className="extra">
               <div className="content-btn">
                 <button
